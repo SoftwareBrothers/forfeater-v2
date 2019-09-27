@@ -12,7 +12,7 @@ export class Vendor extends BaseEntity {
   url: string;
 
   @Column({ nullable: true })
-  logo_url: string
+  logo_url: string;
 
   @CreateDateColumn()
   createdAt: string;
@@ -20,4 +20,3 @@ export class Vendor extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: string;
 }
-
