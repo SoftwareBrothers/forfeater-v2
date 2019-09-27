@@ -1,0 +1,45 @@
+version: '3.7'
+services:
+  db:
+    container_name: ${APP_NAME}-db
+    image: postgres:latest
+    restart: always
+    env_file: .env
+    ports:
+      - 5432:5432
+    volumes:
+      - ./docker/db:/var/lib/postgresql/data
+
+  node:
+    container_name: ${APP_NAME}-app
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile
+    restart: always
+    volumes:
+      - .:/home/node/app/
+      - /home/node/app/node_modules
+    links:
+      - db
+    env_file:
+      - .env
+    environment:
+      WAIT_HOSTS: db:5432
+
+  nginx:
+    build:
+      context: ./docker/nginx/
+      dockerfile: Dockerfile
+    container_name: ${APP_NAME}-nginx
+    env_file:
+      - .env
+    volumes:
+      - ./docker/logs/nginx/:/var/log/nginx
+      - ./docker/nginx/${DOMAIN}.crt:/etc/nginx/${DOMAIN}.crt
+      - ./docker/nginx/${DOMAIN}.key:/etc/nginx/${DOMAIN}.key
+    depends_on:
+      - db
+      - node
+    ports:
+      - 80:80
+      - 443:443
