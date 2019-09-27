@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { VendorController } from './vendor.controller';
+import { VendorController } from './vendors.controller';
 import { VendorRepository } from './vendor.repository';
 
 @Module({
