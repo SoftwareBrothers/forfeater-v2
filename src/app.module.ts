@@ -3,17 +3,18 @@ import { AppController } from './app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config/typeorm.config';
 import { AuthModule } from './auth/auth.module';
-import { VendorModule } from './vendor/vendor.module';
+import { VendorModule } from './vendors/vendors.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
     AuthModule,
     VendorModule,
+    ProductsModule,
   ],
   controllers: [
     AppController,
-
   ],
   providers: [],
 })
