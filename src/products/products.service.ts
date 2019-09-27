@@ -20,6 +20,13 @@ export class ProductsService {
     };
   }
 
+  async getProductsOfVendor(vendorId: number): Promise<List<Product>> {
+    const products = await this.productRepository.find({ where: { vendor_id: vendorId } });
+    return {
+      items: products
+    };
+  }
+
   async getProductById(id: number): Promise<Product> {
     const product = await this.productRepository.findOne({ where: { id }, relations: ['vendor'] });
 
