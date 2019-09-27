@@ -6,6 +6,8 @@ import { AuthModule } from './auth/auth.module';
 import { SlackModule } from './slack/slack.module';
 import { VendorModule } from './vendors/vendors.module';
 import { ProductsModule } from './products/products.module';
+import { OrdersModule } from './orders/orders.module';
+import { ChoicesModule } from './choices/choices.module';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { ProductsModule } from './products/products.module';
     SlackModule,
     VendorModule,
     ProductsModule,
+    OrdersModule,
+    ChoicesModule,
   ],
   controllers: [
     AppController,

@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Order } from '../orders/order.entity';
 
 @Entity()
 @Unique(['email'])
@@ -21,6 +22,9 @@ export class User extends BaseEntity {
 
   @Column()
   hash: string;
+
+  @OneToMany(type => Order, order => order.owner)
+  orders: Order[];
 
   @CreateDateColumn()
   createdAt: string;
