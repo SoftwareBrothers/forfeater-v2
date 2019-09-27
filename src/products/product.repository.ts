@@ -2,7 +2,6 @@ import { EntityRepository, Repository } from 'typeorm';
 import { Product } from './product.entity';
 import { CreateProductDto } from './dto/create-product.dto';
 import { Vendor } from '../vendors/vendor.entity';
-import { NotFoundException } from '@nestjs/common';
 
 @EntityRepository(Product)
 export class ProductRepository extends Repository<Product> {
