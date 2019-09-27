@@ -18,6 +18,7 @@ export class OrdersController {
     @Body() createOrderDto: CreateOrderDto,
     @GetUser() user: User
   ) {
+    console.log(createOrderDto, user);
     return this.orderService.createOrder(user, createOrderDto);
   }
 }

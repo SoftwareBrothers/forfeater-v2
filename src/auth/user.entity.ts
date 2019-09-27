@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Exclude } from 'class-transformer';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique, CreateDateColumn, UpdateDateColumn, Exclusion } from 'typeorm';
 import { Order } from '../orders/order.entity';
 
 @Entity()
@@ -17,9 +18,11 @@ export class User extends BaseEntity {
   @Column()
   email: string;
 
+  @Exclude()
   @Column()
   password: string;
 
+  @Exclude()
   @Column()
   hash: string;
 
@@ -27,10 +30,10 @@ export class User extends BaseEntity {
   orders: Order[];
 
   @CreateDateColumn()
-  createdAt: string;
+  created_at: string;
 
   @UpdateDateColumn()
-  updatedAt: string;
+  updated_at: string;
 
   async validatePassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.hash);
