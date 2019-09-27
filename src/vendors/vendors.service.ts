@@ -45,8 +45,10 @@ export class VendorsService {
 
   async updateVendor(id: number, vendorDto: VendorDto): Promise<Vendor> {
     const vendor = await this.getVendorById(id);
-    const { name }: VendorDto = vendorDto;
+    const { name, url, logo_url }: VendorDto = vendorDto;
     vendor.name = name;
+    vendor.url = url;
+    vendor.logo_url = logo_url;
 
     await vendor.save();
 

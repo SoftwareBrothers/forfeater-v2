@@ -2,20 +2,29 @@ import { Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Post, Put, UseG
 import { AuthGuard } from '@nestjs/passport';
 import { List } from 'src/types/generic-list.interface';
 import { VendorsService } from './vendors.service';
+import { ProductsService } from '../products/products.service';
 import { VendorDto } from './dto/vendor.dto';
 import { Vendor } from './vendor.entity';
+import { Product } from '../products/product.entity';
 
 @Controller('vendors')
 @UseGuards(AuthGuard())
 export class VendorController {
   constructor(
     private readonly vendorsService: VendorsService,
+    private readonly productsService: ProductsService,
   ) { }
 
   @Get()
   @HttpCode(200)
   async list(): Promise<List<Vendor>> {
     return this.vendorsService.getAllVendors();
+  }
+
+  @Get(':vendorId/products')
+  @HttpCode(200)
+  async listProducts(@Param() params): Promise<List<Product>> {
+    return this.productsService.getProductsOfVendor(params.vendorId);
   }
 
   @Post()
