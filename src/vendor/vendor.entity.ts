@@ -8,10 +8,10 @@ export class Vendor extends BaseEntity {
   @Column()
   name: string;
 
-  @Column({ nullable: true})
+  @Column({ nullable: true })
   url: string;
 
-  @Column({ nullable: true})
+  @Column({ nullable: true })
   logo_url: string
 
   @CreateDateColumn()
