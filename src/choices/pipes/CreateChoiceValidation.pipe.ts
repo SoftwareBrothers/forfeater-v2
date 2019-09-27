@@ -12,14 +12,14 @@ export class CreateChoiceValidationPipe implements PipeTransform {
   ) { }
 
   async transform(value: any) {
-    const orderId = parseInt(value.orderId, 10);
+    const orderId = +value.orderId;
     const order = await this.orderRepository.findOne({ where: { orderId }, relations: ['order_product'] });
 
     if (!order) {
       throw new NotFoundException(`Order (id ${orderId}) not found`);
     }
 
-    const productId = parseInt(value.productId, 10);
+    const productId = +value.productId;
     const product = await this.productRepository.findOne({ where: { productId } });
 
     if (!product) {
