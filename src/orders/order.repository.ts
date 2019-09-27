@@ -9,6 +9,7 @@ import { OrderListFilterDto } from './dto/order-list-filter.dto';
 
 @EntityRepository(Order)
 export class OrderRepository extends Repository<Order> {
+
   private async createProducts(order: Order, productIds: Number[]): Promise<OrderProduct[]> {
     return Promise.all(productIds.map(id => {
       const orderProduct = new OrderProduct();
@@ -18,14 +19,14 @@ export class OrderRepository extends Repository<Order> {
     }));
   }
 
-  async createOrder(user: User, createOrderDto: CreateOrderDto): Promise<Order> {
-    const { vendor, products, deadlineAt, deliveryAt } = createOrderDto;
+  async createOrder(user: User, createOrderDto: CreateOrderDto, vendor: Vendor): Promise<Order> {
+    const { products, deadlineAt, deliveryAt } = createOrderDto;
 
     const order = new Order();
     order.deadline_at = deadlineAt;
     order.delivery_at = deliveryAt;
     order.owner = user;
-    order.vendor = vendor as any as Vendor;
+    order.vendor = vendor;
 
     await order.save();
     await this.createProducts(order, products);
