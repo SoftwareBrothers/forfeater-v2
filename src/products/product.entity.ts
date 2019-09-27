@@ -21,18 +21,18 @@ export class Product extends BaseEntity {
   @Column({ nullable: true })
   description: string;
 
-  @Column()
-  require_description: boolean;
+  @Column({ name: 'require_description' })
+  requireDescription: boolean;
 
-  @Column()
-  is_vege: boolean;
+  @Column({ name: 'is_vege' })
+  isVege: boolean;
 
-  @Column()
-  is_vegan: boolean;
+  @Column({ name: 'is_vegan' })
+  isVegan: boolean;
 
-  @CreateDateColumn()
-  created_at: string;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: string;
 
-  @UpdateDateColumn()
-  updated_at: string;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: string;
 }

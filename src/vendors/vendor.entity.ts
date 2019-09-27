@@ -13,8 +13,8 @@ export class Vendor extends BaseEntity {
   @Column({ nullable: true })
   url: string;
 
-  @Column({ nullable: true })
-  logo_url: string;
+  @Column({ nullable: true, name: 'logo_url' })
+  logoUrl: string;
 
   @OneToMany(type => Product, product => product.vendor)
   products: Product[];
@@ -22,9 +22,9 @@ export class Vendor extends BaseEntity {
   @OneToMany(type => Order, order => order.owner)
   orders: Order[];
 
-  @CreateDateColumn()
-  created_at: string;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: string;
 
-  @UpdateDateColumn()
-  updated_at: string;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: string;
 }

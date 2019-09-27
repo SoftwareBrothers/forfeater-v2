@@ -10,22 +10,22 @@ export class Choice extends BaseEntity {
 
   @ManyToOne(type => User, user => user.choices, { eager: false, nullable: false })
   @JoinColumn({ name: 'user_id' })
-  user: User;
+  userId: User;
 
   @ManyToOne(type => Order, order => order.choices, { eager: false, nullable: false })
   @JoinColumn({ name: 'order_id' })
-  order: Order;
+  orderId: Order;
 
   @ManyToOne(type => Product, product => product.choices, { eager: false, nullable: false })
   @JoinColumn({ name: 'product_id' })
-  product: Product;
+  productId: Product;
 
   @Column()
   comment: string;
 
-  @CreateDateColumn()
-  created_at: string;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: string;
 
-  @UpdateDateColumn()
-  updated_at: string;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: string;
 }

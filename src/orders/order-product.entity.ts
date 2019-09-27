@@ -9,9 +9,9 @@ export class OrderProduct extends BaseEntity {
 
   @ManyToOne(type => Order, order => order.order_product, { eager: true, nullable: false })
   @JoinColumn({ name: 'order_id' })
-  order: Order;
+  orderId: Order;
 
   @ManyToOne(type => Product, product => product.order_product, { eager: true, nullable: false })
   @JoinColumn({ name: 'product_id' })
-  product: Product;
+  productId: Product;
 }
