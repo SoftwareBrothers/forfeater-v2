@@ -24,8 +24,8 @@ export class OrdersService {
     const vendor = await this.vendorRepository.findOne(+vendorId);
 
     const order = await this.orderRepository.createOrder(user, createOrderDto, vendor);
-    const formattedDeadline = moment(order.deadline_at).locale('pl');
-    const formattedDelivery = moment(order.delivery_at).locale('pl');
+    const formattedDeadline = moment(order.deadlineAt).locale('pl');
+    const formattedDelivery = moment(order.deliveryAt).locale('pl');
     const message = [
       { text: `@channel [TEST] W ${formattedDelivery.format('dddd DD MMMM')} retro, więc czas na wybór dań po retro :alert:Zamawiamy z ${order.vendor.name} :smile: Zbieram zamówienia do ${formattedDeadline.format('HH:mm DD MMMM')}, jemy ${formattedDelivery.format('HH:mm DD MMMM')}. :arrow_right:` },
       { text: 'https://forms.gle/T2DnL7QXd3c8AbNo9' }
@@ -54,7 +54,7 @@ export class OrdersService {
     const { order_product, ...rest } = order;
     return {
       ...rest,
-      products: order_product.map(orderProduct => orderProduct.product)
+      products: order_product.map(orderProduct => orderProduct.productId)
     } as any as Order;
   }
 }

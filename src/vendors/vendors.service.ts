@@ -11,7 +11,7 @@ export class VendorsService {
   constructor(
     @InjectRepository(VendorRepository)
     private readonly vendorRepository: VendorRepository,
-  ) {}
+  ) { }
 
   async createVendor(createVendorDto: VendorDto): Promise<Vendor> {
     return this.vendorRepository.create(createVendorDto);
@@ -45,10 +45,10 @@ export class VendorsService {
 
   async updateVendor(id: number, vendorDto: VendorDto): Promise<Vendor> {
     const vendor = await this.getVendorById(id);
-    const { name, url, logo_url }: VendorDto = vendorDto;
+    const { name, url, logoUrl }: VendorDto = vendorDto;
     vendor.name = name;
     vendor.url = url;
-    vendor.logo_url = logo_url;
+    vendor.logoUrl = logoUrl;
 
     await vendor.save();
 

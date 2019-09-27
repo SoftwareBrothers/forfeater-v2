@@ -23,9 +23,9 @@ export class OrderRepository extends Repository<Order> {
     const { products, deadlineAt, deliveryAt } = createOrderDto;
 
     const order = new Order();
-    order.deadline_at = deadlineAt;
-    order.delivery_at = deliveryAt;
-    order.owner = user;
+    order.deadlineAt = deadlineAt;
+    order.deliveryAt = deliveryAt;
+    order.ownerId = user;
     order.vendor = vendor;
 
     await order.save();
