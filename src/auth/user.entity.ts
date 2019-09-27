@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import { Exclude } from 'class-transformer';
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique, CreateDateColumn, UpdateDateColumn, Exclusion } from 'typeorm';
 import { Order } from '../orders/order.entity';
 
@@ -18,12 +17,10 @@ export class User extends BaseEntity {
   @Column()
   email: string;
 
-  @Exclude()
-  @Column()
+  @Column({ select: false })
   password: string;
 
-  @Exclude()
-  @Column()
+  @Column({ select: false })
   hash: string;
 
   @OneToMany(type => Order, order => order.owner)
