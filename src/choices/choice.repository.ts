@@ -6,7 +6,6 @@ import { User } from '../auth/user.entity';
 @EntityRepository(Choice)
 export class ChoiceRepository extends Repository<Choice> {
   async create(choiceDto: ChoiceDto, user: User, orderId: number, productId: number): Promise<Choice> {
-    console.log(user);
     const { comment }: ChoiceDto = choiceDto;
     const choice = new Choice();
     choice.user = user as any as User;
