@@ -23,7 +23,7 @@ export class VendorController {
 
   @Get(':vendorId/products')
   @HttpCode(200)
-  async listOfVendor(@Param() params): Promise<List<Product>> {
+  async listProducts(@Param() params): Promise<List<Product>> {
     return this.productsService.getProductsOfVendor(params.vendorId);
   }
 
