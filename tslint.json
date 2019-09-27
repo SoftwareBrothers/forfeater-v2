@@ -14,7 +14,10 @@
     ],
     "trailing-comma": false,
     "member-access": false,
-    "indent": false,
+    "indent": [
+      "error",
+      2
+    ],
     "ordered-imports": [
       false
     ],

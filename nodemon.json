@@ -1,6 +1,10 @@
 {
-  "watch": ["dist"],
+  "watch": [
+    "dist"
+  ],
   "ext": "js",
   "exec": "node dist/main",
-  "ignore": ["node_modules"]
+  "ignore": [
+    "node_modules"
+  ]
 }
