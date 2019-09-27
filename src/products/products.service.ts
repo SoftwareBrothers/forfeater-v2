@@ -21,7 +21,7 @@ export class ProductsService {
   }
 
   async getProductsOfVendor(vendorId: number): Promise<List<Product>> {
-    const products = await this.productRepository.find({ where: { vendor_id: vendorId } });
+    const products = await this.productRepository.find({ where: { vendor: vendorId } });
     return {
       items: products
     };
