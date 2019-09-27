@@ -1,5 +1,7 @@
-import { BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, Entity, JoinColumn } from 'typeorm';
+import { BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, Entity, JoinColumn, ManyToMany, JoinTable, OneToMany } from 'typeorm';
 import { Vendor } from '../vendors/vendor.entity';
+import { Order } from '../orders/order.entity';
+import { OrderProduct } from '../orders/order-product.entity';
 
 @Entity()
 export class Product extends BaseEntity {
@@ -9,6 +11,11 @@ export class Product extends BaseEntity {
   @ManyToOne(type => Vendor, vendor => vendor.products, { eager: false, nullable: false })
   @JoinColumn({ name: 'vendor_id' })
   vendor: Vendor;
+
+  // @ManyToMany(type => Order)
+  // orders: Order[];
+  @OneToMany(type => OrderProduct, orderProduct => orderProduct.product, { eager: false, nullable: false })
+  order_product: OrderProduct[];
 
   @Column()
   name: string;
