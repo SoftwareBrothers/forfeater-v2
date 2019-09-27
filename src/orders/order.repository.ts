@@ -1,10 +1,11 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository, Repository, MoreThan } from 'typeorm';
 import { Order } from './order.entity';
 import { User } from '../auth/user.entity';
 import { Vendor } from '../vendors/vendor.entity';
 import { OrderProduct } from './order-product.entity';
 import { Product } from '../products/product.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
+import { OrderListFilterDto } from './dto/order-list-filter.dto';
 
 @EntityRepository(Order)
 export class OrderRepository extends Repository<Order> {
@@ -31,7 +32,13 @@ export class OrderRepository extends Repository<Order> {
     return order;
   }
 
-  async getAllOrders(user: User): Promise<Order[]> {
-    return this.find({ where: { user }, relations: ['owner', 'vendor', 'order_product'] });
+  async getAllOrders(user: User, orderListFilterDto: OrderListFilterDto): Promise<Order[]> {
+    const { active } = orderListFilterDto;
+    const condition: any = { user };
+
+    if (active) {
+      condition.deadline_at = MoreThan(new Date().toISOString());
+    }
+    return this.find({ where: condition, relations: ['owner', 'vendor', 'order_product'] });
   }
 }
