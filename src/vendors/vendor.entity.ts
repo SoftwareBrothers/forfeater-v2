@@ -23,8 +23,8 @@ export class Vendor extends BaseEntity {
   orders: Order[];
 
   @CreateDateColumn()
-  createdAt: string;
+  created_at: string;
 
   @UpdateDateColumn()
-  updatedAt: string;
+  updated_at: string;
 }
