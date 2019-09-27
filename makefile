@@ -8,5 +8,7 @@ start:
 	docker-compose -f ./docker-compose.yaml up --build -d
 stop:
 	docker-compose -f ./docker-compose.yaml stop
+logs:
+	docker-compose logs -f
 restart:
 	make stop && make start
