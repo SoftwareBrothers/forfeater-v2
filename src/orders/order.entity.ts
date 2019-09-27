@@ -1,11 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany, ManyToOne, JoinColumn, BaseEntity } from 'typeorm';
 import { User } from '../auth/user.entity';
 import { Vendor } from '../vendors/vendor.entity';
 import { Product } from '../products/product.entity';
 import { OrderProduct } from './order-product.entity';
 
 @Entity()
-export class Order {
+export class Order extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
