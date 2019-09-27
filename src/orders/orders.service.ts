@@ -18,8 +18,6 @@ export class OrdersService {
   ) { }
 
   async createOrder(user: User, createOrderDto: CreateOrderDto) {
-    // const { vendor: vendorId, products } = createOrderDto;
-    // const vendor = await this.vendorRepository.findOne(vendorId);
     return this.orderRepository.createOrder(user, createOrderDto);
   }
 

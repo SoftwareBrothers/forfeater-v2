@@ -17,12 +17,9 @@ export class OrderRepository extends Repository<Order> {
     }));
   }
 
-  // async createOrder(user: User, vendor: Vendor, products: Number[]): Promise<Order> {
   async createOrder(user: User, createOrderDto: CreateOrderDto): Promise<Order> {
     const { vendor, products, deadlineAt, deliveryAt } = createOrderDto;
 
-    console.log(deadlineAt, typeof deadlineAt, deadlineAt instanceof Date);
-    console.log(deliveryAt, typeof deliveryAt, deliveryAt instanceof Date);
     const order = new Order();
     order.deadline_at = deadlineAt;
     order.delivery_at = deliveryAt;

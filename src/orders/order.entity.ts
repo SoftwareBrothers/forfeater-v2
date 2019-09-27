@@ -9,10 +9,6 @@ export class Order extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  // @ManyToMany(type => Product)
-  // @JoinTable({ name: 'order_product' })
-  // products: Product[];
-
   @ManyToOne(type => User, user => user.orders, { eager: false, nullable: false })
   @JoinColumn({ name: 'owner_id' })
   owner: User;
