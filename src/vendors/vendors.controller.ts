@@ -1,7 +1,8 @@
-import { Controller, Delete, Get, HttpCode, Post, Put, UseGuards, Body, ValidationPipe } from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Post, Put, UseGuards, UsePipes, Body, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { List } from 'src/types/generic-list.interface';
 import { VendorsService } from './vendors.service';
-import { CreateVendorDto } from './dto/create-vendor.dto';
+import { VendorDto } from './dto/vendor.dto';
 import { Vendor } from './vendor.entity';
 
 @Controller('vendors')
@@ -13,31 +14,40 @@ export class VendorController {
 
   @Get()
   @HttpCode(200)
-  list() {
-    return this.vendorsService.getVendors();
+  async list(): Promise<List<Vendor>> {
+    return this.vendorsService.getAllVendors();
   }
 
   @Post()
   @HttpCode(201)
-  create(@Body(ValidationPipe) createVendorDto: CreateVendorDto): Promise<Vendor> {
+  @UsePipes(ValidationPipe)
+  async create(@Body(ValidationPipe) createVendorDto: VendorDto): Promise<Vendor> {
     return this.vendorsService.createVendor(createVendorDto);
   }
 
-  @Put()
+  @Put(':id')
   @HttpCode(200)
-  update() {
-    return { vendors: true };
+  @UsePipes(ValidationPipe)
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() vendorDto: VendorDto
+  ) {
+    return this.vendorsService.updateVendor(id, vendorDto);
   }
 
-  @Get('/:id')
+  @Get(':id')
   @HttpCode(200)
-  show() {
-    return { vendors: true };
+  async show(
+    @Param('id', ParseIntPipe) id: number
+  ) {
+    return this.vendorsService.getVendorById(id);
   }
 
-  @Delete('/:id')
+  @Delete(':id')
   @HttpCode(204)
-  remove() {
-    return { vendors: true };
+  async delete(
+    @Param('id', ParseIntPipe) id: number
+  ) {
+    return this.vendorsService.deleteVendor(id);
   }
 }

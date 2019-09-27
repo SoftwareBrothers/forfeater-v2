@@ -1,20 +1,16 @@
 import { Repository, EntityRepository } from 'typeorm';
 import { Vendor } from './vendor.entity';
-import { CreateVendorDto } from './dto/create-vendor.dto';
+import { VendorDto } from './dto/vendor.dto';
 
 @EntityRepository(Vendor)
 export class VendorRepository extends Repository<Vendor> {
-  async create(createVendorDto: CreateVendorDto): Promise<Vendor> {
-    const vendor = this.create(createVendorDto);
+  async create(vendorDto: VendorDto): Promise<Vendor> {
+    const { name }: VendorDto = vendorDto;
+    const vendor = new Vendor();
+    vendor.name = name;
 
-    await this.save(vendor);
-  }
+    await vendor.save();
 
-  async findAll(): Promise<Vendor[]> {
-    return this.find();
-  }
-
-  async findById(vendorId: number): Promise<Vendor> {
-    return this.findOne(vendorId);
+    return vendor;
   }
 }
