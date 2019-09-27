@@ -3,41 +3,44 @@ import { User } from './user.entity';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { ConflictException, InternalServerErrorException } from '@nestjs/common';
 import bcrypt from 'bcrypt';
+import { SignUpCredentialsDto } from './dto/sign-up-credentials.dto';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
-  async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    const { username, password } = authCredentialsDto;
+  async signUp(signUpCredentialsDto: SignUpCredentialsDto): Promise<void> {
+    const { first_name, last_name, email, password } = signUpCredentialsDto;
 
     const user = new User();
-    user.username = username;
-    user.salt = await bcrypt.genSalt();
-    user.password = await this.hashPassword(password, user.salt);
+    user.email = email;
+    user.first_name = first_name;
+    user.last_name = last_name;
+    user.hash = await bcrypt.genSalt();
+    user.password = await this.hashPassword(password, user.hash);
 
     try {
       await user.save();
     } catch (error) {
       console.log(error);
       if (error.code === '23505') { // duplicate error code
-        throw new ConflictException('Username already exists');
+        throw new ConflictException('Email already exists');
       } else {
         throw new InternalServerErrorException();
       }
     }
   }
 
-  async validatePassword(authCredentialsDto: AuthCredentialsDto): Promise<string> {
-    const { username, password } = authCredentialsDto;
-    const user = await this.findOne({ username });
+  async validatePassword(authCredentialsDto: AuthCredentialsDto): Promise<User> {
+    const { email, password } = authCredentialsDto;
+    const user = await this.findOne({ email });
 
     if (user && await user.validatePassword(password)) {
-      return user.username;
+      return user;
     }
 
     return null;
   }
 
-  private async hashPassword(password: string, salt: string): Promise<string> {
-    return bcrypt.hash(password, salt);
+  private async hashPassword(password: string, hash: string): Promise<string> {
+    return bcrypt.hash(password, hash);
   }
 }
