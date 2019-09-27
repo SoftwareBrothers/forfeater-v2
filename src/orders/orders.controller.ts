@@ -14,12 +14,11 @@ export class OrdersController {
   ) { }
 
   @Post()
-  @UsePipes(ValidationPipe)
+  @UsePipes(new ValidationPipe({ transform: true }))
   async create(
     @Body() createOrderDto: CreateOrderDto,
     @GetUser() user: User
   ) {
-    console.log(createOrderDto, user);
     return this.orderService.createOrder(user, createOrderDto);
   }
 

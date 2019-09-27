@@ -18,14 +18,13 @@ export class OrdersService {
   ) { }
 
   async createOrder(user: User, createOrderDto: CreateOrderDto) {
-    const { vendor: vendorId, products } = createOrderDto;
-    const vendor = await this.vendorRepository.findOne(vendorId);
-    return this.orderRepository.createOrder(user, vendor, products);
+    // const { vendor: vendorId, products } = createOrderDto;
+    // const vendor = await this.vendorRepository.findOne(vendorId);
+    return this.orderRepository.createOrder(user, createOrderDto);
   }
 
   async getAllOrders(user: User): Promise<List<Order>> {
     const orders = await this.orderRepository.getAllOrders(user);
-    console.log(orders[0].order_product);
     return {
       items: orders.map(this.mapOrderProducts)
     };

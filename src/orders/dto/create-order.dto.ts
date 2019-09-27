@@ -1,4 +1,5 @@
-import { IsNumber, IsArray } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsNumber, IsDateString, IsDate } from 'class-validator';
 
 export class CreateOrderDto {
   @IsNumber()
@@ -6,4 +7,12 @@ export class CreateOrderDto {
 
   @IsNumber({ allowInfinity: false, allowNaN: false }, { each: true })
   products: number[];
+
+  @Type(() => Date)
+  @IsDate()
+  deadlineAt: Date;
+
+  @Type(() => Date)
+  @IsDate()
+  deliveryAt: Date;
 }
