@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique, CreateDateColumn, UpdateDateColumn, Exclusion } from 'typeorm';
 import { Order } from '../orders/order.entity';
 
 @Entity()
@@ -17,20 +17,20 @@ export class User extends BaseEntity {
   @Column()
   email: string;
 
-  @Column()
+  @Column({ select: false })
   password: string;
 
-  @Column()
+  @Column({ select: false })
   hash: string;
 
   @OneToMany(type => Order, order => order.owner)
   orders: Order[];
 
   @CreateDateColumn()
-  createdAt: string;
+  created_at: string;
 
   @UpdateDateColumn()
-  updatedAt: string;
+  updated_at: string;
 
   async validatePassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.hash);

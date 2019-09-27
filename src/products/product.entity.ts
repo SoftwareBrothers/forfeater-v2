@@ -12,8 +12,6 @@ export class Product extends BaseEntity {
   @JoinColumn({ name: 'vendor_id' })
   vendor: Vendor;
 
-  // @ManyToMany(type => Order)
-  // orders: Order[];
   @OneToMany(type => OrderProduct, orderProduct => orderProduct.product, { eager: false, nullable: false })
   order_product: OrderProduct[];
 
