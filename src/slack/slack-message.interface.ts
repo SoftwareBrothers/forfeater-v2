@@ -1,3 +1,3 @@
 export interface SlackMessage {
-    text: string;
-  }
+  text: string;
+}
