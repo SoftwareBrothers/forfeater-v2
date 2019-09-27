@@ -3,6 +3,7 @@
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
+    "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es6",
@@ -11,5 +12,7 @@
     "baseUrl": "./",
     "incremental": true
   },
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

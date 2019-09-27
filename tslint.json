@@ -12,7 +12,7 @@
       true,
       "single"
     ],
-    "trailing-comma": false,
+    "trailing-comma": true,
     "member-access": false,
     "indent": [
       "error",

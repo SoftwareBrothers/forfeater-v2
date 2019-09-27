@@ -1,7 +1,7 @@
-FROM node:12-alpine
+FROM node:12
 
 ADD --chown=node:node https://github.com/ufoscout/docker-compose-wait/releases/download/2.2.1/wait /wait
-RUN chmod +x /wait && apk add openssl
+RUN chmod +x /wait
 
 WORKDIR /home/node/app
 
