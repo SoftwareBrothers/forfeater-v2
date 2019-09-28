@@ -1,9 +1,11 @@
 import { Controller, Post, Body, ValidationPipe } from '@nestjs/common';
+import { ApiUseTags } from '@nestjs/swagger';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { AuthService } from './auth.service';
 import { SignUpCredentialsDto } from './dto/sign-up-credentials.dto';
 
 @Controller('auth')
+@ApiUseTags('auth')
 export class AuthController {
   constructor(
     private readonly authService: AuthService,

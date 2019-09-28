@@ -1,5 +1,6 @@
 import { Controller, Get, UseGuards, Post, Put, Delete, Param, ParseIntPipe, UsePipes, ValidationPipe, Body } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiUseTags } from '@nestjs/swagger';
 import { ChoicesService } from './choices.service';
 import { ChoiceDto } from './dto/choice.dto';
 import { GetUser } from '../auth/get-user.decorator';
@@ -8,6 +9,7 @@ import { CreateChoiceValidationPipe } from './pipes/CreateChoiceValidation.pipe'
 
 @Controller('orders/:orderId/products/:productId')
 @UseGuards(AuthGuard())
+@ApiUseTags('orders')
 export class ChoicesController {
   constructor(private readonly choicesService: ChoicesService) { }
 

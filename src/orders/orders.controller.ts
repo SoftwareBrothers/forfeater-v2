@@ -1,4 +1,5 @@
 import { Controller, Post, ValidationPipe, UsePipes, Body, UseGuards, Get, Param, Query } from '@nestjs/common';
+import { ApiUseTags } from '@nestjs/swagger';
 import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
@@ -9,6 +10,7 @@ import { OrderListFilterDto } from './dto/order-list-filter.dto';
 
 @Controller('orders')
 @UseGuards(AuthGuard())
+@ApiUseTags('orders')
 export class OrdersController {
   constructor(
     private readonly orderService: OrdersService
