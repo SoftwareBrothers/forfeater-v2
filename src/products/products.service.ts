@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProductRepository } from './product.repository';
 import { List } from '../types/generic-list.interface';
 import { Product } from './product.entity';
-import { CreateProductDto } from './dto/create-product.dto';
 import { ProductDto } from './dto/product.dto';
 import { Vendor } from '../vendors/vendor.entity';
 
@@ -42,15 +41,9 @@ export class ProductsService {
     return this.productRepository.createProduct(productDto, vendor);
   }
 
-  async createGeneralProduct(createProductDto: CreateProductDto): Promise<Product> {
-    // TODO after vendor repository is done check if vendor exists and then pass it
-    return this.productRepository.createGeneralProduct(createProductDto);
-  }
-
-  async updateProduct(id: number, createProductDto: CreateProductDto): Promise<Product> {
+  async updateProduct(id: number, createProductDto: ProductDto): Promise<Product> {
     const product = await this.getProductById(id);
-    const { vendor, name, description, requireDescription, isVegan, isVege }: CreateProductDto = createProductDto;
-    product.vendor = vendor as any as Vendor;
+    const { name, description, requireDescription, isVegan, isVege }: ProductDto = createProductDto;
     product.name = name;
     product.description = description;
     product.requireDescription = requireDescription;

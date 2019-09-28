@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { VendorController } from './vendors.controller';
+import { VendorsController } from './vendors.controller';
+import { ProductsController } from './products.controller';
 import { VendorRepository } from './vendor.repository';
 import { AuthModule } from '../auth/auth.module';
 import { VendorsService } from './vendors.service';
@@ -12,7 +13,7 @@ import { ProductRepository } from '../products/product.repository';
     TypeOrmModule.forFeature([ProductRepository, VendorRepository]),
     AuthModule,
   ],
-  controllers: [VendorController],
+  controllers: [ProductsController, VendorsController],
   providers: [
     ProductsService,
     VendorsService
