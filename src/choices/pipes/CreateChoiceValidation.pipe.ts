@@ -13,7 +13,7 @@ export class CreateChoiceValidationPipe implements PipeTransform {
 
   async transform(value: any) {
     const orderId = +value.orderId;
-    const order = await this.orderRepository.findOne({ where: { orderId }, relations: ['order_product'] });
+    const order = await this.orderRepository.findOne({ where: { id: orderId }, relations: ['orderProduct'] });
 
     if (!order) {
       throw new NotFoundException(`Order (id ${orderId}) not found`);
@@ -26,7 +26,7 @@ export class CreateChoiceValidationPipe implements PipeTransform {
       throw new NotFoundException(`Product (id ${productId}) not found`);
     }
 
-    const orderProductsIds = order.order_product.map(orderProduct => orderProduct.id);
+    const orderProductsIds = order.orderProduct.map(orderProduct => orderProduct.product.id);
 
     if (!orderProductsIds.includes(productId)) {
       throw new UnprocessableEntityException('You can not choose product for this order');

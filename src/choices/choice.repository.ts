@@ -2,6 +2,8 @@ import { EntityRepository, Repository } from 'typeorm';
 import { Choice } from '../choices/choice.entity';
 import { ChoiceDto } from './dto/choice.dto';
 import { User } from '../auth/user.entity';
+import { Order } from '../orders/order.entity';
+import { Product } from '../products/product.entity';
 
 @EntityRepository(Choice)
 export class ChoiceRepository extends Repository<Choice> {

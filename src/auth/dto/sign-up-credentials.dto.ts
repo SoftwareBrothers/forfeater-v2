@@ -3,11 +3,11 @@ import { IsString, MinLength, MaxLength, Matches, IsEmail } from 'class-validato
 export class SignUpCredentialsDto {
   @IsString()
   @MinLength(3)
-  first_name: string;
+  firstName: string;
 
   @IsString()
   @MinLength(3)
-  last_name: string;
+  lastName: string;
 
   @IsString()
   @IsEmail()

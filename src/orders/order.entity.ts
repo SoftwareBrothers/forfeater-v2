@@ -14,15 +14,15 @@ export class Order extends BaseEntity {
   owner: User;
 
   @OneToMany(type => OrderProduct, orderProduct => orderProduct.order, { eager: false, nullable: false })
-  order_product: OrderProduct[];
+  orderProduct: OrderProduct[];
 
   @ManyToOne(type => Vendor, vendor => vendor.products, { eager: false, nullable: false })
   @JoinColumn({ name: 'vendor_id' })
   vendor: Vendor;
 
-  @Column()
-  deadline_at: Date;
+  @Column({ name: 'deadline_at' })
+  deadlineAt: Date;
 
-  @Column()
-  delivery_at: Date;
+  @Column({ name: 'delivery_at' })
+  deliveryAt: Date;
 }

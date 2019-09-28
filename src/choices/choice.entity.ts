@@ -23,9 +23,9 @@ export class Choice extends BaseEntity {
   @Column()
   comment: string;
 
-  @CreateDateColumn()
-  created_at: string;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: string;
 
-  @UpdateDateColumn()
-  updated_at: string;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: string;
 }

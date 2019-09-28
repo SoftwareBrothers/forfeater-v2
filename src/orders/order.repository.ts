@@ -14,7 +14,8 @@ export class OrderRepository extends Repository<Order> {
     return Promise.all(productIds.map(id => {
       const orderProduct = new OrderProduct();
       orderProduct.product = id as any as Product;
-      orderProduct.order = order.id as any as Order;
+      orderProduct.order = order as any as Order;
+
       return orderProduct.save();
     }));
   }
@@ -23,13 +24,14 @@ export class OrderRepository extends Repository<Order> {
     const { products, deadlineAt, deliveryAt } = createOrderDto;
 
     const order = new Order();
-    order.deadline_at = deadlineAt;
-    order.delivery_at = deliveryAt;
+    order.deadlineAt = deadlineAt;
+    order.deliveryAt = deliveryAt;
     order.owner = user;
     order.vendor = vendor;
 
     await order.save();
     await this.createProducts(order, products);
+
     return order;
   }
 
@@ -38,8 +40,8 @@ export class OrderRepository extends Repository<Order> {
     const condition: any = { user };
 
     if (active) {
-      condition.deadline_at = MoreThan(new Date().toISOString());
+      condition.deadlineAt = MoreThan(new Date().toISOString());
     }
-    return this.find({ where: condition, relations: ['owner', 'vendor', 'order_product'] });
+    return this.find({ where: condition, relations: ['owner', 'vendor', 'orderProduct'] });
   }
 }

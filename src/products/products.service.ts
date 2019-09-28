@@ -48,9 +48,9 @@ export class ProductsService {
     product.vendor = vendor as any as Vendor;
     product.name = name;
     product.description = description;
-    product.require_description = requireDescription;
-    product.is_vege = isVege;
-    product.is_vegan = isVegan;
+    product.requireDescription = requireDescription;
+    product.isVege = isVege;
+    product.isVegan = isVegan;
 
     await product.save();
     return product;

@@ -8,11 +8,11 @@ export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  first_name: string;
+  @Column({ name: 'first_name' })
+  firstName: string;
 
-  @Column()
-  last_name: string;
+  @Column({ name: 'last_name' })
+  lastName: string;
 
   @Column()
   email: string;
@@ -26,11 +26,11 @@ export class User extends BaseEntity {
   @OneToMany(type => Order, order => order.owner)
   orders: Order[];
 
-  @CreateDateColumn()
-  created_at: string;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: string;
 
-  @UpdateDateColumn()
-  updated_at: string;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: string;
 
   async validatePassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.hash);

@@ -10,5 +10,5 @@ export class VendorDto {
 
   @IsString()
   @IsOptional()
-  logo_url: string;
+  logoUrl: string;
 }
