@@ -4,6 +4,7 @@ import { ProductRepository } from './product.repository';
 import { List } from '../types/generic-list.interface';
 import { Product } from './product.entity';
 import { CreateProductDto } from './dto/create-product.dto';
+import { ProductDto } from './dto/product.dto';
 import { Vendor } from '../vendors/vendor.entity';
 
 @Injectable()
@@ -37,9 +38,13 @@ export class ProductsService {
     return product;
   }
 
-  async createProduct(createProductDto: CreateProductDto): Promise<Product> {
+  async createProduct(productDto: ProductDto, vendor: Vendor): Promise<Product> {
+    return this.productRepository.createProduct(productDto, vendor);
+  }
+
+  async createGeneralProduct(createProductDto: CreateProductDto): Promise<Product> {
     // TODO after vendor repository is done check if vendor exists and then pass it
-    return this.productRepository.createProduct(createProductDto);
+    return this.productRepository.createGeneralProduct(createProductDto);
   }
 
   async updateProduct(id: number, createProductDto: CreateProductDto): Promise<Product> {

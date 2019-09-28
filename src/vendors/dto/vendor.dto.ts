@@ -1,4 +1,4 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString, IsUrl } from 'class-validator';
 import { ApiModelProperty } from '@nestjs/swagger';
 
 export class VendorDto {
@@ -8,11 +8,13 @@ export class VendorDto {
 
   @IsString()
   @IsOptional()
+  @IsUrl()
   @ApiModelProperty()
   url: string;
 
   @IsString()
   @IsOptional()
+  @IsUrl()
   @ApiModelProperty()
   logoUrl: string;
 }

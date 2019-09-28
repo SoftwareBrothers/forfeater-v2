@@ -7,6 +7,8 @@ import { ProductsService } from '../products/products.service';
 import { VendorDto } from './dto/vendor.dto';
 import { Vendor } from './vendor.entity';
 import { Product } from '../products/product.entity';
+import { ProductDto } from '../products/dto/product.dto';
+import { ExistVendorValidationPipe } from './pipes/ExistVendorValidation.pipe';
 
 @Controller('vendors')
 @UseGuards(AuthGuard())
@@ -36,6 +38,17 @@ export class VendorController {
   @ApiCreatedResponse({ description: 'The vendor has been successfully created.', type: Vendor })
   async create(@Body(ValidationPipe) createVendorDto: VendorDto): Promise<Vendor> {
     return this.vendorsService.createVendor(createVendorDto);
+  }
+
+  @Post(':vendorId/products')
+  @HttpCode(201)
+  // @UsePipes(ValidationPipe)
+  @ApiCreatedResponse({ description: 'The product has been successfully created.', type: Product })
+  async createProduct(
+    @Body(ValidationPipe) productDto: ProductDto,
+    @Param('vendorId', ExistVendorValidationPipe) vendor: Vendor
+    ): Promise<Product> {
+    return this.productsService.createProduct(productDto, vendor);
   }
 
   @Put(':id')

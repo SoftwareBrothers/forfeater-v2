@@ -31,7 +31,7 @@ export class ProductsController {
   async create(
     @Body() createProductDto: CreateProductDto
   ) {
-    return this.productService.createProduct(createProductDto);
+    return this.productService.createGeneralProduct(createProductDto);
   }
 
   @Put(':id')
