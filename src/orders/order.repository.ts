@@ -30,7 +30,6 @@ export class OrderRepository extends Repository<Order> {
     order.vendor = vendor;
 
     await order.save();
-    console.log('createProducts', order, products);
     await this.createProducts(order, products);
 
     return order;
