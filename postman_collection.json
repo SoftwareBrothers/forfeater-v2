@@ -9,6 +9,247 @@
 			"name": "vendor",
 			"item": [
 				{
+					"name": "products",
+					"item": [
+						{
+							"name": "list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/vendors/{{vendorId}}/products",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"vendors",
+										"{{vendorId}}",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"product 22\",\n\t\"isVege\": false,\n\t\"isVegan\": true,\n\t\"requireDescription\": false,\n\t\"description\": \"To jest opis\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/vendors/{{vendorId}}/products",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"vendors",
+										"{{vendorId}}",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/vendors/{{vendorId}}/products/{{productId}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"vendors",
+										"{{vendorId}}",
+										"products",
+										"{{productId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Product Vege\",\n\t\"isVege\": true,\n\t\"description\": \"Jednak Vege\",\n\t\"requireDescription\": false,\n\t\"isVegan\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/vendors/{{vendorId}}/products/{{productId}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"vendors",
+										"{{vendorId}}",
+										"products",
+										"{{productId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/vendors/{{vendorId}}/products/{{productId}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"vendors",
+										"{{vendorId}}",
+										"products",
+										"{{productId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "list",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -49,54 +290,6 @@
 							],
 							"path": [
 								"vendors"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "list products of vendor",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/vendors/{{vendorId}}/products",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"vendors",
-								"{{vendorId}}",
-								"products"
 							]
 						}
 					},
@@ -158,7 +351,7 @@
 								}
 							]
 						},
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -240,7 +433,7 @@
 			"name": "products",
 			"item": [
 				{
-					"name": "Products - list",
+					"name": "list",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -266,87 +459,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/products",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"products"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Products - show",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/products/{{productId}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"products",
-								"{{productId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Products - create",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"vendor\": 2,\n\t\"name\": \"product 22\",\n\t\"isVege\": false,\n\t\"isVegan\": true,\n\t\"requireDescription\": false\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -360,89 +473,6 @@
 							],
 							"path": [
 								"products"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Products - update",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Product Vege\",\n\t\"isVege\": true,\n\t\"description\": \"Jednak Vege\",\n\t\"requireDescription\": false,\n\t\"vendor\": 1,\n\t\"isVegan\": true\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/products/{{productId}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"products",
-								"{{productId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Products - delete",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/products/1",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"products",
-								"1"
 							]
 						}
 					},
