@@ -1,8 +1,9 @@
-import { Controller, Post, ValidationPipe, UsePipes, Body, UseGuards, Get, Param, Query } from '@nestjs/common';
+import { Controller, Post, HttpCode, ParseIntPipe, ValidationPipe, UsePipes, Body, Patch, UseGuards, Get, Param, Query } from '@nestjs/common';
 import { ApiBearerAuth, ApiUseTags, ApiCreatedResponse } from '@nestjs/swagger';
 import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
+import { UpdateOrderDto } from './dto/update-order.dto';
 import { OrdersService } from './orders.service';
 import { AuthGuard } from '@nestjs/passport';
 import { Order } from './order.entity';
@@ -40,6 +41,16 @@ export class OrdersController {
     @Param('id') id: number,
     @GetUser() user: User
   ) {
-    return this.orderService.getOrderById(id, user);
+    return this.orderService.show(id, user);
+  }
+
+  @Patch(':id')
+  @HttpCode(200)
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body(ValidationPipe) updateOrderDto: UpdateOrderDto,
+    @GetUser() user: User
+  ) {
+    return this.orderService.update(id, updateOrderDto, user);
   }
 }

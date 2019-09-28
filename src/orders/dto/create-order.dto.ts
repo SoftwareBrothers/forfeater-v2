@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsNumber, IsDateString, IsDate } from 'class-validator';
+import { IsNumber, IsDate } from 'class-validator';
 import { ApiModelProperty } from '@nestjs/swagger';
 
 export class CreateOrderDto {
