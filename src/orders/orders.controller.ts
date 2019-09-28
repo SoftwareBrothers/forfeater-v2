@@ -1,5 +1,5 @@
 import { Controller, Post, ValidationPipe, UsePipes, Body, UseGuards, Get, Param, Query } from '@nestjs/common';
-import { ApiUseTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiUseTags, ApiCreatedResponse } from '@nestjs/swagger';
 import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
@@ -11,6 +11,7 @@ import { OrderListFilterDto } from './dto/order-list-filter.dto';
 @Controller('orders')
 @UseGuards(AuthGuard())
 @ApiUseTags('orders')
+@ApiBearerAuth()
 export class OrdersController {
   constructor(
     private readonly orderService: OrdersService
@@ -18,6 +19,7 @@ export class OrdersController {
 
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
+  @ApiCreatedResponse({ description: 'The order has been successfully created.', type: Order })
   async create(
     @Body() createOrderDto: CreateOrderDto,
     @GetUser() user: User

@@ -1,6 +1,6 @@
 import { Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Post, Put, UseGuards, UsePipes, Body, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiUseTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiUseTags, ApiCreatedResponse } from '@nestjs/swagger';
 import { List } from 'src/types/generic-list.interface';
 import { VendorsService } from './vendors.service';
 import { ProductsService } from '../products/products.service';
@@ -11,6 +11,7 @@ import { Product } from '../products/product.entity';
 @Controller('vendors')
 @UseGuards(AuthGuard())
 @ApiUseTags('vendors')
+@ApiBearerAuth()
 export class VendorController {
   constructor(
     private readonly vendorsService: VendorsService,
@@ -32,6 +33,7 @@ export class VendorController {
   @Post()
   @HttpCode(201)
   @UsePipes(ValidationPipe)
+  @ApiCreatedResponse({ description: 'The vendor has been successfully created.', type: Vendor })
   async create(@Body(ValidationPipe) createVendorDto: VendorDto): Promise<Vendor> {
     return this.vendorsService.createVendor(createVendorDto);
   }
