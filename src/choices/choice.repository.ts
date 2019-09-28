@@ -10,9 +10,9 @@ export class ChoiceRepository extends Repository<Choice> {
   async create(choiceDto: ChoiceDto, user: User, orderId: number, productId: number): Promise<Choice> {
     const { comment }: ChoiceDto = choiceDto;
     const choice = new Choice();
-    choice.userId = user as any as User;
-    choice.orderId = orderId as any as Order;
-    choice.productId = productId as any as Product;
+    choice.user = user as any as User;
+    choice.order = orderId as any as Order;
+    choice.product = productId as any as Product;
     choice.comment = comment;
 
     await choice.save();

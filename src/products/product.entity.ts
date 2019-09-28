@@ -13,7 +13,7 @@ export class Product extends BaseEntity {
   vendor: Vendor;
 
   @OneToMany(type => OrderProduct, orderProduct => orderProduct.product, { eager: false, nullable: false })
-  order_product: OrderProduct[];
+  orderProduct: OrderProduct[];
 
   @Column()
   name: string;

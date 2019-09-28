@@ -10,15 +10,15 @@ export class Choice extends BaseEntity {
 
   @ManyToOne(type => User, user => user.choices, { eager: false, nullable: false })
   @JoinColumn({ name: 'user_id' })
-  userId: User;
+  user: User;
 
   @ManyToOne(type => Order, order => order.choices, { eager: false, nullable: false })
   @JoinColumn({ name: 'order_id' })
-  orderId: Order;
+  order: Order;
 
   @ManyToOne(type => Product, product => product.choices, { eager: false, nullable: false })
   @JoinColumn({ name: 'product_id' })
-  productId: Product;
+  product: Product;
 
   @Column()
   comment: string;

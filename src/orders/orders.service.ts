@@ -27,7 +27,7 @@ export class OrdersService {
     const formattedDeadline = moment(order.deadlineAt).locale('pl');
     const formattedDelivery = moment(order.deliveryAt).locale('pl');
     const message = [
-      { text: `@channel [TEST] W ${formattedDelivery.format('dddd DD MMMM')} retro, więc czas na wybór dań po retro :alert:Zamawiamy z ${order.vendor.name} :smile: Zbieram zamówienia do ${formattedDeadline.format('HH:mm DD MMMM')}, jemy ${formattedDelivery.format('HH:mm DD MMMM')}. :arrow_right:` },
+      { text: `[TEST] W ${formattedDelivery.format('dddd DD MMMM')} retro, więc czas na wybór dań po retro :alert:Zamawiamy z ${order.vendor.name} :smile: Zbieram zamówienia do ${formattedDeadline.format('HH:mm DD MMMM')}, jemy ${formattedDelivery.format('HH:mm DD MMMM')}. :arrow_right:` },
       { text: 'https://forms.gle/T2DnL7QXd3c8AbNo9' }
     ];
     this.slackService.postMessage(message);
@@ -43,7 +43,7 @@ export class OrdersService {
   }
 
   async getOrderById(id: number, user: User): Promise<Order> {
-    const order = await this.orderRepository.findOne({ where: { id, user }, relations: ['owner', 'vendor', 'order_product'] });
+    const order = await this.orderRepository.findOne({ where: { id, user }, relations: ['owner', 'vendor', 'orderProduct'] });
     if (!order) {
       throw new NotFoundException(`Order (id ${id}) not found`);
     }
@@ -51,10 +51,10 @@ export class OrdersService {
   }
 
   private mapOrderProducts(order: Order): Order {
-    const { order_product, ...rest } = order;
+    const { orderProduct, ...rest } = order;
     return {
       ...rest,
-      products: order_product.map(orderProduct => orderProduct.productId)
+      products: orderProduct.map(orderProduct => orderProduct.product)
     } as any as Order;
   }
 }
