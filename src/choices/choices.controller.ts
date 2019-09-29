@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards, Post, Put, Delete, Param, ParseIntPipe, UsePipes, ValidationPipe, Body } from '@nestjs/common';
+import { Body, Controller, Patch, Param, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiUseTags, ApiCreatedResponse } from '@nestjs/swagger';
 import { ChoicesService } from './choices.service';
@@ -6,9 +6,9 @@ import { ChoiceDto } from './dto/choice.dto';
 import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
 import { Choice } from './choice.entity';
-import { CreateChoiceValidationPipe } from './pipes/CreateChoiceValidation.pipe';
+import { ExistOrderValidationPipe } from '../orders/pipes/ExistOrderValidation.pipe';
 
-@Controller('orders/:orderId/products/:productId')
+@Controller('orders/:orderId/choices')
 @UseGuards(AuthGuard())
 @ApiUseTags('orders')
 @ApiBearerAuth()
@@ -19,11 +19,22 @@ export class ChoicesController {
   @UsePipes(ValidationPipe)
   @ApiCreatedResponse({ description: 'The choice has been successfully created.', type: Choice })
   async create(
-    @Param(CreateChoiceValidationPipe) params,
+    @Param(ExistOrderValidationPipe) params,
     @Body() choiceDto: ChoiceDto,
     @GetUser() user: User
   ) {
-    return this.choicesService.createChoice(choiceDto, user, params.orderId, params.productId);
+    return this.choicesService.createChoice(choiceDto, user, params.orderId);
+  }
+
+  @Patch()
+  @UsePipes(ValidationPipe)
+  @ApiCreatedResponse({ description: 'The choice has been successfully updated.', type: Choice })
+  async update(
+    @Param(ExistOrderValidationPipe) params,
+    @Body() choiceDto: ChoiceDto,
+    @GetUser() user: User
+  ) {
+    return this.choicesService.updateChoice(choiceDto, user, params.orderId);
   }
 
 }

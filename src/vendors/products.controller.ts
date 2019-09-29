@@ -36,7 +36,7 @@ export class ProductsController {
 
   @Get()
   @HttpCode(200)
-  async list(@Param() params): Promise<List<Product>> {
+  async list(@Param('vendorId', ExistVendorValidationPipe) vendor: Vendor): Promise<List<Product>> {
     return this.productsService.getProductsOfVendor(params.vendorId);
   }
 

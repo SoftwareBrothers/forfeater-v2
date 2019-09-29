@@ -6,6 +6,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ChoiceRepository } from './choice.repository';
 import { OrderRepository } from '../orders/order.repository';
 import { ProductRepository } from '../products/product.repository';
+import { VendorRepository } from '../vendors/vendor.repository';
+import { ProductsService } from '../products/products.service';
+import { OrdersService } from '../orders/orders.service';
+import { SlackService } from '../slack/slack.service';
 
 @Module({
   imports: [
@@ -13,6 +17,6 @@ import { ProductRepository } from '../products/product.repository';
     AuthModule
   ],
   controllers: [ChoicesController],
-  providers: [ChoicesService]
+  providers: [ChoicesService, ProductsService]
 })
 export class ChoicesModule {}
