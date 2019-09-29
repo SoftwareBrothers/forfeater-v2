@@ -10,11 +10,10 @@ export class ExistVendorValidationPipe implements PipeTransform {
 
   async transform(vendorId: number) {
 
-    if (!Number.isInteger(vendorId)) {
+    if (!Number.isInteger(+vendorId)) {
       throw new UnprocessableEntityException('vendorId must be a number!');
     }
 
-    console.log('validation pipe', vendorId);
     const vendor = await this.vendorRepository.findOne({ where: { id: vendorId } });
 
     if (!vendor) {
