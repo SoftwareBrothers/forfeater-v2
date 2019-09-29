@@ -485,7 +485,104 @@
 			"name": "orders",
 			"item": [
 				{
-					"name": "Order - show",
+					"name": "choices",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"productId\": 1,\n\t\"comment\": \"Mocno wysmażone!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/orders/{{orderId}}/choices",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"orders",
+										"{{orderId}}",
+										"choices"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"productId\": 2,\n\t\"comment\": \"Mocno wysmażone!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/orders/{{orderId}}/choices",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"orders",
+										"{{orderId}}",
+										"choices"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "show",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -513,53 +610,7 @@
 					"response": []
 				},
 				{
-					"name": "create choice",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"comment\": \"Mocno wysmażone!\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/orders/{{orderId}}/products/{{productId}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"orders",
-								"{{orderId}}",
-								"products",
-								"{{productId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Orders - create",
+					"name": "create",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -602,7 +653,51 @@
 					"response": []
 				},
 				{
-					"name": "Order - list",
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"deadlineAt\": \"2019-10-12T14:00:00.000Z\",\n\t\"deliveryAt\": \"2019-10-13T15:00:00.000Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/orders/{{orderId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"orders",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
 					"request": {
 						"auth": {
 							"type": "bearer",
